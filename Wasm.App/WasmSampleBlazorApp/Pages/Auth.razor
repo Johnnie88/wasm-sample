@@ -1,9 +1,58 @@
 ﻿@*Definir a rota deste componente*@
 @page "/"
 
-<h3>Auth</h3>
+@*page libs*@
+@using WasmSampleBlazorApp.Requests
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h2>Auth User</h2>
+                    <p>Enter with your credentials.</p>
+                </div>
+                <hr />
+                <EditForm Model="@request" OnValidSubmit="@OnSubmit">
+
+                    <DataAnnotationsValidator/>
+
+                    <div class="mb-2">
+                        <label>Email Login</label>
+                        <InputText class="form-control" @bind-Value="request.Email"/>
+                    </div>
+                    <div class="mb-2">
+                        <label>Password</label>
+                        <InputText type="password" class="form-control" @bind-Value="request.Password"/>
+                        <div class="text-end">
+                            <NavLink class="nav-link" href="password-recovery" />
+                            Forgot password?
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="d-grid">
+                            <input type="submit" class="btn btn-primary" value="Login" />
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="d-grid">
+                            <NavLink class="btn btn-light" href="create-user">
+                                <strong>Register</strong>
+                            </NavLink>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
 
 @*Código C# do componente*@
 @code {
+    // object form
+    private AuthRequest request = new AuthRequest();
+
+    // Submit event
+    protected async Task OnSubmit() => await Task.CompletedTask;
 
 }
