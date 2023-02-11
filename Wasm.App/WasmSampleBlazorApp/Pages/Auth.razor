@@ -15,20 +15,30 @@
                 <hr />
                 <EditForm Model="@request" OnValidSubmit="@OnSubmit">
 
+                    @*Validations component*@
                     <DataAnnotationsValidator/>
 
                     <div class="mb-2">
                         <label>Email Login</label>
                         <InputText class="form-control" @bind-Value="request.Email"/>
+                        <span class="text-danger">
+                            <ValidationMessage For="@(() => request.Email)"/>
+                        </span>
                     </div>
+
                     <div class="mb-2">
                         <label>Password</label>
                         <InputText type="password" class="form-control" @bind-Value="request.Password"/>
+                        <span class="text-danger">
+                            <ValidationMessage For="@(() => request.Password)" />
+                        </span>
                         <div class="text-end">
-                            <NavLink class="nav-link" href="password-recovery" />
+                            <NavLink class="nav-link" href="password-recovery" >
                             Forgot password?
+                            </NavLink>
                         </div>
                     </div>
+
                     <div class="mb-2">
                         <div class="d-grid">
                             <input type="submit" class="btn btn-primary" value="Login" />
