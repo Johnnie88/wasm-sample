@@ -1,9 +1,80 @@
 ﻿@*Definir a rota deste componente*@
 @page "/create-user"
 
-<h3>CreateUser</h3>
+@*page libs*@
+@using WasmSampleBlazorApp.Requests
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center">
+                    <h2>Create User</h2>
+                    <p>Fill the form to create your new account.</p>
+                </div>
+                <hr />
+                <EditForm Model="@request" OnValidSubmit="@OnSubmit">
+
+                    @*Validations component*@
+
+                    <DataAnnotationsValidator />
+
+                    <div class="mb-2">
+                        <label>User name</label>
+                        <InputText class="form-control" @bind-Value="request.Name" />
+                        <span class="text-danger">
+                            <ValidationMessage For="@(() => request.Name)" />
+                        </span>
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Email</label>
+                        <InputText class="form-control" @bind-Value="request.Email" />
+                        <span class="text-danger">
+                            <ValidationMessage For="@(() => request.Email)" />
+                        </span>
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Password</label>
+                        <InputText type="password" class="form-control" @bind-Value="request.Password" />
+                        <span class="text-danger">
+                            <ValidationMessage For="@(() => request.Password)" />
+                        </span>
+                    </div>
+
+                    <div class="mb-2">
+                        <label>Confirm your Password</label>
+                        <InputText type="password" class="form-control" @bind-Value="request.PasswordConfirm" />
+                        <span class="text-danger">
+                            <ValidationMessage For="@(() => request.PasswordConfirm)" />
+                        </span>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="d-grid">
+                            <input type="submit" class="btn btn-primary" value="Create User" />
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="d-grid">
+                            <NavLink class="btn btn-light" href="/">
+                                Already registered? <strong>Sign in here!</strong>
+                            </NavLink>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
 
 @*Código C# do componente*@
 @code {
+    // object form
+    private CreateUserRequest request = new CreateUserRequest();
 
+    // Submit event
+    protected async Task OnSubmit() => await Task.CompletedTask;
 }
