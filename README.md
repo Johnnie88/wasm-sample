@@ -1,2 +1,1 @@
-# wasm-sample
-The sample wasm blazor app
+# The sample wasm blazor app Login Template
